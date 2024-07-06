@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { Square } from './components/Square'
 import { TURNS } from './constans'
 import { checkWinnerFrom, checkEndGame } from './logic/board'
 import { WinnerModal } from './components/WinnerModal'
 import './App.css'
+import { resetGameToEstorage, saveGameToStorage } from './logic/storage'
 
 
 
@@ -23,11 +24,10 @@ function App() {
 
   const resetGame = () => {
     setBoard(Array(9).fill(null))
-    setTurn(TURNS.x)
+    setTurn(TURNS.X)
     setWinner(null)
 
-    window.localStorage.removeItem('board')
-    window.localStorage.removeItem('turn')
+    resetGameToEstorage()
 }
   
   const updateBoard = (index) => {
@@ -39,12 +39,13 @@ function App() {
     // const newBoard1 = structuredClone(board) metodo para crear una copia profunda del array
     newBoard[index] = turn;
     setBoard(newBoard);
-    // cambiar de turno
+
+       // cambiar de turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn)
     // guardar aqui partida
-    window.localStorage.setItem('board', JSON.stringify(newBoard))
-    window.localStorage.setItem('turn', newTurn)
+  
+
     // revisar si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
@@ -54,6 +55,15 @@ function App() {
       setWinner(false)
     }
   }
+
+  useEffect(() => {
+    saveGameToStorage({
+      board: board,
+      turn: turn,
+    })
+      console.log('useEffect')
+  }, [turn, board]) //un Array vacio es el parametro que le damos para que se renderice almenos una vez si no tenemos una lista de dependencias, si no ponemos nada se ejecutará cada vez que se renderice el componente
+      //En este caso cada vez que cambie la dependencia turn o la dependencia board se ejecutara el codigo que lleva
 
   
 
