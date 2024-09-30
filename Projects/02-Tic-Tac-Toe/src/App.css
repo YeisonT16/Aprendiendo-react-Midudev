@@ -9,7 +9,9 @@
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background: gray;
+  max-width: 100vw;
+  background: rgb(51,51,51);
+  background: radial-gradient(circle, rgba(51,51,51,0.510329131652661) 0%, rgba(61,61,61,1) 100%);
 }
 
 
