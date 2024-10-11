@@ -69,8 +69,8 @@ function App() {
 
   return (
     <main className='w-fit m-10 text-center'>
-      <h1 className='mb-4 text-yellow-600 font-bold text-2xl'>TIC TAC TOE</h1>
-      <button className='border rounded-2xl w-52 h-10 mb-4 font-medium border-white text-yellow-600 bg-black hover:bg-white hover:border-yellow-600 hover:text-yellow-600 hover:transition-transform hover:scale-110' onClick={resetGame}>Reset del juego</button>
+      <h1 className='mb-4 text-yellow-500 font-bold text-2xl'>TIC TAC TOE</h1>
+      <button className='border-2 rounded-2xl w-52 h-10 mb-4 font-medium border-white text-yellow-600 bg-black hover:bg-white hover:border-yellow-600 hover:text-yellow-600 hover:transition-transform hover:scale-110' onClick={resetGame}>Reset del juego</button>
       <section className='grid grid-cols-3 gap-2'>
         {
           board.map((square, index) => {
